@@ -2,6 +2,8 @@
 #define RSA_PRIV_FILENAME "/data/dropbear/dropbear_rsa_host_key"
 #define ECDSA_PRIV_FILENAME "/data/dropbear/dropbear_ecdsa_host_key"
 #define ED25519_PRIV_FILENAME "/data/dropbear/dropbear_ed25519_host_key"
+#define HAVE_CRYPT 0
+#define DROPBEAR_SVR_PASSWORD_AUTH 0
 #define INETD_MODE 0
 #define DROPBEAR_SMALL_CODE 0
 #define DO_MOTD 0

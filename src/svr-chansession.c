@@ -953,7 +953,7 @@ static void execchild(const void *user_data) {
 	if (envcp != NULL) {
 		cp = m_strdup(envcp);
 	}
-#if ANDROID
+#if __ANDROID__
 	char *env_workspace=strdup(getenv("ANDROID_PROPERTY_WORKSPACE"));
     char *env_bootclass=strdup(getenv("BOOTCLASSPATH"));
     char *env_ld=strdup(getenv("LD_LIBRARY_PATH"));
