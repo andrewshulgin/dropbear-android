@@ -7,7 +7,9 @@
 #define INETD_MODE 0
 #define DROPBEAR_SMALL_CODE 0
 #define DO_MOTD 0
+#define DEBUG_TRACE 5
 #define MOTD_FILENAME "/dev/null"
 #define DROPBEAR_PIDFILE "/data/dropbear/dropbear.pid"
 #define DEFAULT_PATH "/system/bin:/system/busybox/bin:/usr/bin:/bin"
 #define DEFAULT_ROOT_PATH "/system/sbin:/system/bin:/system/busybox/sbin:/system/busybox/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+#define DEFAULT_LD_LIBRARY_PATH "/vendor/lib:/system/lib"

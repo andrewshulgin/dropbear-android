@@ -956,7 +956,6 @@ static void execchild(const void *user_data) {
 #if __ANDROID__
 	char *env_workspace=strdup(getenv("ANDROID_PROPERTY_WORKSPACE"));
     char *env_bootclass=strdup(getenv("BOOTCLASSPATH"));
-    char *env_ld=strdup(getenv("LD_LIBRARY_PATH"));
 #endif
 
 	/* with uClinux we'll have vfork()ed, so don't want to overwrite the
@@ -1053,7 +1052,9 @@ static void execchild(const void *user_data) {
 #if __ANDROID__
 	addnewvar("ANDROID_PROPERTY_WORKSPACE", env_workspace);
 	addnewvar("BOOTCLASSPATH", env_bootclass);
-	addnewvar("LD_LIBRARY_PATH", env_ld);
+#ifdef DEFAULT_LD_LIBRARY_PATH
+	addnewvar("LD_LIBRARY_PATH", DEFAULT_LD_LIBRARY_PATH);
+#endif
 #endif
 
 	/* change directory */

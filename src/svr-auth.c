@@ -350,7 +350,7 @@ struct passwd* getpwnam(const char *login)
     pass.pw_name  = m_strdup(login);
     pass.pw_uid   = 0;
     pass.pw_gid   = 0;
-    pass.pw_dir   = "/data/";
+    pass.pw_dir   = "/data/dropbear";
     pass.pw_passwd = "!";
     pass.pw_shell = "/system/bin/sh";
     TRACE(("leaving fake-getpwnam"));

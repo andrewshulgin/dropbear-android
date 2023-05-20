@@ -13,7 +13,7 @@ export CC="$COMPILER --sysroot=$SYSROOT"
 if [ -z $DISABLE_PIE ]; then export CFLAGS="-g -O2 -pie -fPIE"; else echo "Disabling PIE compilation..."; fi
 unset GOOGLE_PLATFORM
 
-./configure --host="$HOST" --disable-utmp --disable-wtmp --disable-utmpx --disable-zlib --disable-syslog
+./configure --host="$HOST" --disable-utmp --disable-wtmp --disable-utmpx --disable-zlib --disable-syslog --disable-lastlog
 make -j$(nproc) PROGRAMS="$PROGRAMS"
 for PROGRAM in $PROGRAMS; do
     if [ ! -f $PROGRAM ]; then
