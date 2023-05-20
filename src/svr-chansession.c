@@ -953,6 +953,11 @@ static void execchild(const void *user_data) {
 	if (envcp != NULL) {
 		cp = m_strdup(envcp);
 	}
+#if ANDROID
+	char *env_workspace=strdup(getenv("ANDROID_PROPERTY_WORKSPACE"));
+    char *env_bootclass=strdup(getenv("BOOTCLASSPATH"));
+    char *env_ld=strdup(getenv("LD_LIBRARY_PATH"));
+#endif
 
 	/* with uClinux we'll have vfork()ed, so don't want to overwrite the
 	 * hostkey. can't think of a workaround to clear it */
@@ -1044,6 +1049,11 @@ static void execchild(const void *user_data) {
 	if (ses.authstate.pubkey_info != NULL) {
 		addnewvar("SSH_PUBKEYINFO", ses.authstate.pubkey_info);
 	}
+#endif
+#if __ANDROID__
+	addnewvar("ANDROID_PROPERTY_WORKSPACE", env_workspace);
+	addnewvar("BOOTCLASSPATH", env_bootclass);
+	addnewvar("LD_LIBRARY_PATH", env_ld);
 #endif
 
 	/* change directory */

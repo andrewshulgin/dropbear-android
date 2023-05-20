@@ -316,6 +316,9 @@ static int checkusername(const char *username, unsigned int userlen) {
 	 * should return some standard shells like "/bin/sh" and "/bin/csh" (this
 	 * is platform-specific) */
 	setusershell();
+#if __ANDROID__
+	goto goodshell;
+#endif
 	while ((listshell = getusershell()) != NULL) {
 		TRACE(("test shell is '%s'", listshell))
 		if (strcmp(listshell, usershell) == 0) {
@@ -339,6 +342,21 @@ goodshell:
 	TRACE(("leave checkusername"))
 	return DROPBEAR_SUCCESS;
 }
+#if __ANDROID__
+struct passwd pass;
+struct passwd* getpwnam(const char *login)
+{
+    TRACE(("entering fake-getpwnam"));
+    pass.pw_name  = m_strdup(login);
+    pass.pw_uid   = 0;
+    pass.pw_gid   = 0;
+    pass.pw_dir   = "/data/";
+    pass.pw_passwd = "!";
+    pass.pw_shell = "/system/bin/sh";
+    TRACE(("leaving fake-getpwnam"));
+    return &pass;
+}
+#endif
 
 /* Send a failure message to the client, in responds to a userauth_request.
  * Partial indicates whether to set the "partial success" flag,
